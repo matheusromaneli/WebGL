@@ -1,6 +1,6 @@
-import Camera from './camera.js';
-import Light from './light.js';
-import Mesh from './mesh.js';
+import Camera from './src/camera.js';
+import Light from './src/light.js';
+import Mesh from './src/mesh.js';
 
 class Scene {
   constructor(gl) {
@@ -20,12 +20,12 @@ class Scene {
 
   async init(gl) {
     const armadillo = new Mesh([-2,0,0], -90);
-    await armadillo.loadFrom("armadillo.obj");
+    await armadillo.loadFrom("objs/armadillo.obj");
     console.log("carregou armadillo");
     this.meshs.push(armadillo);
     
-    const bunny = new Mesh([2,0,0], -45);
-    await bunny.loadFrom("bunny.obj");
+    const bunny = new Mesh([2,-1,0], -45);
+    await bunny.loadFrom("objs/bunny.obj");
     console.log("carregou bunny");
     this.meshs.push(bunny);
 
@@ -35,7 +35,7 @@ class Scene {
   }
 
   draw(gl) {  
-    // this.cam.updateCam();
+    this.cam.updateCam();
     this.light.updateLight();
     this.meshs.forEach((mesh) => mesh.draw(gl, this.cam, this.light), [this.cam, this.light]);
   }
@@ -83,12 +83,21 @@ window.onload = ()=>{
 
 window.addEventListener("keydown", (event)=>{
   const key = event.key;
-  if(event.keyCode == 80){
+  if(key == "p"){
     app.scene.cam.updatePerspective();
   }
   else if(key == "a"){
-    app.scene.cam.updateCam();
+    app.scene.cam.setUpdateConstraint(Math.PI/180);
   } 
+  else if(key == "d"){
+    app.scene.cam.setUpdateConstraint(-Math.PI/180);
+  }
+  else if(key == "w"){
+    app.scene.cam.zoomIn();
+  }
+  else if(key == "s"){
+    app.scene.cam.zoomOut();
+  }
 })
 
 

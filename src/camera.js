@@ -5,6 +5,7 @@ export default class Camera {
     this.at  = vec3.fromValues(0.0, 0.0, 0.0);
     this.up  = vec3.fromValues(0.0, 1.0, 0.0);
     this.angle = 0;
+    this.updateConstraint = Math.PI/180;
     // Parâmetros da projeção
     this.fovy = Math.PI/3;
     this.aspect = gl.canvas.width / gl.canvas.height;
@@ -48,7 +49,7 @@ export default class Camera {
   }
   
   updateEye(){
-    this.angle += Math.PI/180;
+    this.angle += this.updateConstraint;
     mat4.rotateY(this.view, this.view, this.angle);
   }
 
@@ -58,9 +59,23 @@ export default class Camera {
     this.updateProjectionMatrix();
   }
 
+  setUpdateConstraint(c){
+    this.updateConstraint = c;
+  }
+
   updatePerspective(){
     console.log("Perspective changed");
     this.perspective = !this.perspective;  
+  }
+
+  zoomIn(){
+    let value = vec3.create();
+    vec3.subtract(this.eye, this.eye , vec3.normalize(value, this.eye));
+  }
+
+  zoomOut(){
+    let value = vec3.create();
+    vec3.add(this.eye, this.eye , vec3.normalize(value, this.eye));
   }
 
 }
