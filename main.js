@@ -8,8 +8,8 @@ class Scene {
     this.cam = new Camera(gl);
 
     // Luz
-    const pos1 = [3.0, 3.0, 3.0, 1.0];
-    const pos2 = [-3.0, -3.0, -3.0, 1.0];
+    const pos1 = [4.0, 1.0, 4.0, 1.0];
+    const pos2 = [-4.0, -1.0, -4.0, 1.0];
     const color1 = [1.0, 0.0, 0.0, 1.0];
     const color2 = [0.0, 0.0, 1.0, 1.0];
     this.light = new Light(pos1, color1, pos2, color2);
