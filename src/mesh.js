@@ -73,7 +73,6 @@ export default class Mesh {
   }
 
   createVAO(gl) {
-    this.heds.estrela(2);
     const vbos = this.heds.getVBOs();
 
     var coordsAttributeLocation = gl.getAttribLocation(this.program, "position");
@@ -116,9 +115,14 @@ export default class Mesh {
     return this.program;
   }
 
+  estrela(vid, gl){
+    this.heds.estrela(vid);
+    this.createVAO(gl);
+  }
+
   draw(gl, cam, light) {
     // faces orientadas no sentido anti-horário
-    // gl.frontFace(gl.CCW);
+    gl.frontFace(gl.CCW);
 
     // face culling
     gl.enable(gl.CULL_FACE);

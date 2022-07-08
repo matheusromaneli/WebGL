@@ -162,6 +162,7 @@ export class HalfEdgeDS {
   }
 
   estrela(vid) {
+    //TODO: desfazer ultima estrela
     const vColor = [1.0, 0.0, 0.0, 1.0];
     
     const first = this.vertices[vid].he;

@@ -27,8 +27,9 @@ class Scene {
     const bunny = new Mesh([2,-1,0], -45);
     await bunny.loadFrom("objs/bunny.obj");
     console.log("carregou bunny");
+    
     this.meshs.push(bunny);
-
+    
     for(let i = 0; i< this.meshs.length; i++){
         this.meshs[i].init(gl);
     }
@@ -100,5 +101,12 @@ window.addEventListener("keydown", (event)=>{
   }
 })
 
+document.getElementById("submit").onclick = () => {
+  const indexa = document.getElementById('ai').value;
+  app.scene.meshs[0].estrela(indexa, app.gl);
+
+  const indexb = document.getElementById('bi').value;
+  app.scene.meshs[1].estrela(indexb, app.gl);
+}
 
 
